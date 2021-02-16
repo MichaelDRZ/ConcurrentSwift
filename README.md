@@ -3,7 +3,7 @@ ConcurrentSwift is intended to speed up operations on large collections by provi
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-ConcurrentSwift is a multithreaded implementation of common higher-order functions such as map, compactMap and filter that are applied to the collection types Array, Set and Dictionary. ConcurrentSwift does not implement a reduce function because there are cases where applying reduce on different parts of a collection concurrently could lead to wrong results (this depends on what the used closure does).
+ConcurrentSwift is a multithreaded implementation of common higher-order functions such as map, compactMap and filter that are applied to the collection types Array, Set and Dictionary. ConcurrentSwift does not implement a reduce function because applying reduce on different parts of a collection concurrently could lead to wrong results in some cases (depending on the closure).
 
 <!-- USAGE EXAMPLES -->
 ## Usage
