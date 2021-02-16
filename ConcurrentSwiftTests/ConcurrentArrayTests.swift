@@ -23,10 +23,6 @@ final class ConcurrentArrayTests: XCTestCase {
         return text.range(of: "123") != nil
     }
     
-//    let reduce123: (String, String) -> (String) = { previousText, text in
-//        return text.components(separatedBy: "123").reduce(previousText, +)
-//    }
-    
     // MARK: - SetUp & TearDown
     
     var smallArray: [String]!
@@ -38,9 +34,6 @@ final class ConcurrentArrayTests: XCTestCase {
     var smallFilterResult: [String]!
     var mediumFilterResult: [String]!
     var largeFilterResult: [String]!
-//    var smallReduceResult: String!
-//    var mediumReduceResult: String!
-//    var largeReduceResult: String!
     
     override func setUp() {
         super.setUp()
@@ -48,18 +41,6 @@ final class ConcurrentArrayTests: XCTestCase {
         let seriesLength = 1000
         
         func generateArrayOfRandomSeries(arraySize: Int) -> [String] {
-//            guard arraySize > 0 && seriesLength > 0 else { fatalError("Invalid test settings") }
-//            var array = [String]()
-//            array.reserveCapacity(arraySize)
-//            for _ in 0..<arraySize {
-//                var series = [String]()
-//                series.reserveCapacity(seriesLength)
-//                for _ in 0..<seriesLength {
-//                    series.append(String(Int.random(in: 0..<10)))
-//                }
-//                array.append(series.reduce("", +))
-//            }
-//            return array
             return (1...arraySize).map({ _ in (1...seriesLength).map({ _ in String(Int.random(in: 0..<10)) }).reduce("", +) })
         }
         
@@ -72,9 +53,6 @@ final class ConcurrentArrayTests: XCTestCase {
         smallFilterResult = smallArray.filter(filter123)
         mediumFilterResult = mediumArray.filter(filter123)
         largeFilterResult = largeArray.filter(filter123)
-//        smallReduceResult = smallArray.reduce("", reduce123)
-//        mediumReduceResult = mediumArray.reduce("", reduce123)
-//        largeReduceResult = largeArray.reduce("", reduce123)
     }
     
     override func tearDown() {
@@ -88,9 +66,6 @@ final class ConcurrentArrayTests: XCTestCase {
         smallFilterResult = nil
         mediumFilterResult = nil
         largeFilterResult = nil
-//        smallReduceResult = nil
-//        mediumReduceResult = nil
-//        largeReduceResult = nil
     }
     
     // MARK: - Unit Tests
@@ -130,18 +105,6 @@ final class ConcurrentArrayTests: XCTestCase {
         result = largeArray.concurrentFilter(filter123)
         XCTAssertEqual(result, largeFilterResult, "Test for \"Array's\" function \"concurrentFilter\" failed.")
     }
-    
-//    func testConcurrentReduce() {
-//
-//        var result = smallArray.concurrentReduce("", reduce123)
-//        XCTAssertEqual(result, smallReduceResult, "Test for \"Array's\" function \"concurrentReduce\" failed.")
-//
-//        result = mediumArray.concurrentReduce("", reduce123)
-//        XCTAssertEqual(result, mediumReduceResult, "Test for \"Array's\" function \"concurrentReduce\" failed.")
-//
-//        result = largeArray.concurrentReduce("", reduce123)
-//        XCTAssertEqual(result, largeReduceResult, "Test for \"Array's\" function \"concurrentReduce\" failed.")
-//    }
     
     // MARK: - Performance Test Benchmarks
     
@@ -199,24 +162,6 @@ final class ConcurrentArrayTests: XCTestCase {
         }
     }
     
-//    func testSmallArrayReducePerformanceBenchmark() {
-//        measure {
-//            _ = smallArray.reduce("", reduce123)
-//        }
-//    }
-//
-//    func testMediumArrayReducePerformanceBenchmark() {
-//        measure {
-//            _ = mediumArray.reduce("", reduce123)
-//        }
-//    }
-//
-//    func testLargeArrayReducePerformanceBenchmark() {
-//        measure {
-//            _ = largeArray.reduce("", reduce123)
-//        }
-//    }
-    
     // MARK: - Performance Tests
     
     func testSmallArrayConcurrentMapPerformance() {
@@ -272,23 +217,5 @@ final class ConcurrentArrayTests: XCTestCase {
             _ = largeArray.concurrentFilter(filter123)
         }
     }
-    
-//    func testSmallArrayConcurrentReducePerformance() {
-//        measure {
-//            _ = smallArray.concurrentReduce("", reduce123)
-//        }
-//    }
-//
-//    func testMediumArrayConcurrentReducePerformance() {
-//        measure {
-//            _ = mediumArray.concurrentReduce("", reduce123)
-//        }
-//    }
-//
-//    func testLargeArrayConcurrentReducePerformance() {
-//        measure {
-//            _ = largeArray.concurrentReduce("", reduce123)
-//        }
-//    }
 }
 
